@@ -1,0 +1,12 @@
+<Solution>
+  <Project Path="EShoppingZone.Cart.API.Tests/EShoppingZone.Cart.API.Tests.csproj" />
+  <Project Path="EShoppingZone.Cart.API/EShoppingZone.Cart.API.csproj" />
+  <Project Path="EShoppingZone.Order.API.Tests/EShoppingZone.Order.API.Tests.csproj" />
+  <Project Path="EShoppingZone.Order.API/EShoppingZone.Order.API.csproj" />
+  <Project Path="EShoppingZone.Product.API.Tests/EShoppingZone.Product.API.Tests.csproj" />
+  <Project Path="EShoppingZone.Product.API/EShoppingZone.Product.API.csproj" />
+  <Project Path="EShoppingZone.Profile.API.Tests/EShoppingZone.Profile.API.Tests.csproj" />
+  <Project Path="EShoppingZone.Profile.API/EShoppingZone.Profile.API.csproj" />
+  <Project Path="EShoppingZone.Wallet.API.Tests/EShoppingZone.Wallet.API.Tests.csproj" />
+  <Project Path="EShoppingZone.Wallet.API/EShoppingZone.Wallet.API.csproj" />
+</Solution>
