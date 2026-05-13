@@ -1,0 +1,99 @@
+services:
+  # 1. Product API
+  - type: web
+    name: eshoppingzone-product
+    runtime: docker
+    dockerContext: ./EShoppingZone.Product.API
+    dockerfilePath: ./Dockerfile
+    plan: free
+    envVars:
+      - key: ConnectionStrings__ProductDb
+        fromDatabase:
+          name: eshoppingzone-db
+          property: connectionString
+      - key: Jwt__Key
+        value: EShoppingZone_SuperSecretKey_2026_DoNotShare_MinLength32Chars!
+      - key: Jwt__Issuer
+        value: EShoppingZone
+      - key: Jwt__Audience
+        value: EShoppingZoneClients
+
+  # 2. Profile API
+  - type: web
+    name: eshoppingzone-profile
+    runtime: docker
+    dockerContext: ./EShoppingZone.Profile.API
+    dockerfilePath: ./Dockerfile
+    plan: free
+    envVars:
+      - key: ConnectionStrings__ProfileDb
+        fromDatabase:
+          name: eshoppingzone-db
+          property: connectionString
+      - key: Jwt__Key
+        value: EShoppingZone_SuperSecretKey_2026_DoNotShare_MinLength32Chars!
+      - key: Jwt__Issuer
+        value: EShoppingZone
+      - key: Jwt__Audience
+        value: EShoppingZoneClients
+
+  # 3. Cart API
+  - type: web
+    name: eshoppingzone-cart
+    runtime: docker
+    dockerContext: ./EShoppingZone.Cart.API
+    dockerfilePath: ./Dockerfile
+    plan: free
+    envVars:
+      - key: ConnectionStrings__CartDb
+        fromDatabase:
+          name: eshoppingzone-db
+          property: connectionString
+      - key: Jwt__Key
+        value: EShoppingZone_SuperSecretKey_2026_DoNotShare_MinLength32Chars!
+      - key: Jwt__Issuer
+        value: EShoppingZone
+      - key: Jwt__Audience
+        value: EShoppingZoneClients
+
+  # 4. Order API
+  - type: web
+    name: eshoppingzone-order
+    runtime: docker
+    dockerContext: ./EShoppingZone.Order.API
+    dockerfilePath: ./Dockerfile
+    plan: free
+    envVars:
+      - key: ConnectionStrings__OrderDb
+        fromDatabase:
+          name: eshoppingzone-db
+          property: connectionString
+      - key: Jwt__Key
+        value: EShoppingZone_SuperSecretKey_2026_DoNotShare_MinLength32Chars!
+      - key: Jwt__Issuer
+        value: EShoppingZone
+      - key: Jwt__Audience
+        value: EShoppingZoneClients
+
+  # 5. Wallet API
+  - type: web
+    name: eshoppingzone-wallet
+    runtime: docker
+    dockerContext: ./EShoppingZone.Wallet.API
+    dockerfilePath: ./Dockerfile
+    plan: free
+    envVars:
+      - key: ConnectionStrings__WalletDb
+        fromDatabase:
+          name: eshoppingzone-db
+          property: connectionString
+      - key: Jwt__Key
+        value: EShoppingZone_SuperSecretKey_2026_DoNotShare_MinLength32Chars!
+      - key: Jwt__Issuer
+        value: EShoppingZone
+      - key: Jwt__Audience
+        value: EShoppingZoneClients
+
+databases:
+  - name: eshoppingzone-db
+    plan: free
