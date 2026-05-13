@@ -158,6 +158,7 @@ app.MapControllers();
 using (var scope = app.Services.CreateScope())
 {
     var db = scope.ServiceProvider.GetRequiredService<WalletDbContext>();
+    db.Database.EnsureDeleted(); // CLEAN SLATE
     db.Database.EnsureCreated();
 
     // Fix Identity issue

@@ -15,6 +15,16 @@ namespace EShoppingZone.Profile.API.Data
         {
             base.OnModelCreating(modelBuilder);
 
+            // Force lowercase for PostgreSQL compatibility
+            foreach (var entity in modelBuilder.Model.GetEntityTypes())
+            {
+                entity.SetTableName(entity.GetTableName()?.ToLower());
+                foreach (var property in entity.GetProperties())
+                {
+                    property.SetColumnName(property.GetColumnName().ToLower());
+                }
+            }
+
             modelBuilder.Entity<UserProfile>()
                 .HasMany(u => u.Addresses)
                 .WithOne(a => a.UserProfile)

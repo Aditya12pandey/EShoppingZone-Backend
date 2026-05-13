@@ -12,6 +12,16 @@ namespace EShoppingZone.Cart.API.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            // Force lowercase for PostgreSQL compatibility
+            foreach (var entity in modelBuilder.Model.GetEntityTypes())
+            {
+                entity.SetTableName(entity.GetTableName()?.ToLower());
+                foreach (var property in entity.GetProperties())
+                {
+                    property.SetColumnName(property.GetColumnName().ToLower());
+                }
+            }
+
             modelBuilder.Entity<CartEntity>(entity =>
             {
                 entity.HasKey(c => c.CartId);

@@ -155,13 +155,8 @@ app.MapControllers();
 using (var scope = app.Services.CreateScope())
 {
     var db = scope.ServiceProvider.GetRequiredService<CartDbContext>();
+    db.Database.EnsureDeleted(); // CLEAN SLATE
     db.Database.EnsureCreated();
-    
-    // Ensure the MerchantId column exists (handles cases where migration was already marked as applied)
-    try {
-        db.Database.ExecuteSqlRaw("ALTER TABLE \"CartItems\" ADD COLUMN IF NOT EXISTS \"MerchantId\" integer NOT NULL DEFAULT 0;");
-        db.Database.ExecuteSqlRaw("ALTER TABLE \"Carts\" ALTER COLUMN \"CartId\" DROP IDENTITY IF EXISTS;");
-    } catch { /* Column might already exist or identity already dropped */ }
 }
 
 app.Run();
