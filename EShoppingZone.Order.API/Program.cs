@@ -158,8 +158,15 @@ app.MapControllers();
 // Auto-migration
 using (var scope = app.Services.CreateScope())
 {
-    var db = scope.ServiceProvider.GetRequiredService<OrderDbContext>();
-    db.Database.EnsureCreated();
+    try {
+        // Wait for master service
+        System.Threading.Thread.Sleep(5000);
+        
+        var db = scope.ServiceProvider.GetRequiredService<OrderDbContext>();
+        db.Database.EnsureCreated();
+    } catch (Exception ex) {
+        Console.WriteLine("DB Init Error: " + ex.Message);
+    }
 }
 
 app.Run();

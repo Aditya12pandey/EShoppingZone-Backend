@@ -157,13 +157,20 @@ app.MapControllers();
 // Auto-migration and manual schema fix
 using (var scope = app.Services.CreateScope())
 {
-    var db = scope.ServiceProvider.GetRequiredService<WalletDbContext>();
-    db.Database.EnsureCreated();
-
-    // Fix Identity issue
     try {
-        db.Database.ExecuteSqlRaw("ALTER TABLE \"EWallets\" ALTER COLUMN \"WalletId\" DROP IDENTITY IF EXISTS;");
-    } catch { }
+        // Wait for master service
+        System.Threading.Thread.Sleep(5000);
+        
+        var db = scope.ServiceProvider.GetRequiredService<WalletDbContext>();
+        db.Database.EnsureCreated();
+
+        // Fix Identity issue
+        try {
+            db.Database.ExecuteSqlRaw("ALTER TABLE \"EWallets\" ALTER COLUMN \"WalletId\" DROP IDENTITY IF EXISTS;");
+        } catch { }
+    } catch (Exception ex) {
+        Console.WriteLine("DB Init Error: " + ex.Message);
+    }
 }
 
 app.Run();

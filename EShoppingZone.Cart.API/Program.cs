@@ -154,8 +154,15 @@ app.MapControllers();
 // Auto-migration and manual schema fix
 using (var scope = app.Services.CreateScope())
 {
-    var db = scope.ServiceProvider.GetRequiredService<CartDbContext>();
-    db.Database.EnsureCreated();
+    try {
+        // Wait for master service
+        System.Threading.Thread.Sleep(5000);
+        
+        var db = scope.ServiceProvider.GetRequiredService<CartDbContext>();
+        db.Database.EnsureCreated();
+    } catch (Exception ex) {
+        Console.WriteLine("DB Init Error: " + ex.Message);
+    }
 }
 
 app.Run();

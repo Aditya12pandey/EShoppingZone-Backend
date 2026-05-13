@@ -162,37 +162,56 @@ using (var scope = app.Services.CreateScope())
 {
     try {
         var db = scope.ServiceProvider.GetRequiredService<ProductDbContext>();
+        
+        // Wait a few seconds for Master service to finish clean-up
+        System.Threading.Thread.Sleep(5000); 
+        
         db.Database.EnsureCreated(); 
 
-        if (!db.Products.Any())
+        // Retry logic for seeding
+        int retries = 3;
+        while (retries > 0)
         {
-            db.Products.AddRange(new List<EShoppingZone.Product.API.Entities.ProductEntity>
-            {
-                new() {
-                    ProductName = "Sample Smartphone",
-                    ProductType = "Electronics",
-                    Category = "Mobiles",
-                    Price = 599.99m,
-                    Description = "A great smartphone with amazing features.",
-                    Image = new List<string> { "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9" },
-                    Rating = new Dictionary<int, double> { { 5, 4.5 } },
-                    Review = new Dictionary<int, string> { { 1, "Amazing!" } },
-                    Specification = new Dictionary<string, string> { { "RAM", "8GB" }, { "Storage", "128GB" } }
-                },
-                new() {
-                    ProductName = "Classic Watch",
-                    ProductType = "Accessories",
-                    Category = "Watches",
-                    Price = 120.00m,
-                    Description = "A timeless classic for any occasion.",
-                    Image = new List<string> { "https://images.unsplash.com/photo-1524592094714-0f0654e20314" },
-                    Rating = new Dictionary<int, double> { { 5, 4.8 } },
-                    Review = new Dictionary<int, string> { { 2, "Very elegant." } },
-                    Specification = new Dictionary<string, string> { { "Material", "Leather" }, { "Water Resistance", "50m" } }
+            try {
+                if (!db.Products.Any())
+                {
+                    db.Products.AddRange(new List<EShoppingZone.Product.API.Entities.ProductEntity>
+                    {
+                        new() {
+                            ProductName = "Sample Smartphone",
+                            ProductType = "Electronics",
+                            Category = "Mobiles",
+                            Price = 599.99m,
+                            Description = "A great smartphone with amazing features.",
+                            Image = new List<string> { "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9" },
+                            Rating = new Dictionary<int, double> { { 5, 4.5 } },
+                            Review = new Dictionary<int, string> { { 1, "Amazing!" } },
+                            Specification = new Dictionary<string, string> { { "RAM", "8GB" }, { "Storage", "128GB" } },
+                            MerchantId = 1
+                        },
+                        new() {
+                            ProductName = "Classic Watch",
+                            ProductType = "Accessories",
+                            Category = "Watches",
+                            Price = 120.00m,
+                            Description = "A timeless classic for any occasion.",
+                            Image = new List<string> { "https://images.unsplash.com/photo-1524592094714-0f0654e20314" },
+                            Rating = new Dictionary<int, double> { { 5, 4.8 } },
+                            Review = new Dictionary<int, string> { { 2, "Very elegant." } },
+                            Specification = new Dictionary<string, string> { { "Material", "Leather" }, { "Water Resistance", "50m" } },
+                            MerchantId = 1
+                        }
+                    });
+                    db.SaveChanges();
+                    Console.WriteLine("Database Seeded with sample products!");
                 }
-            });
-            db.SaveChanges();
-            Console.WriteLine("Database Seeded with sample products!");
+                break; // Success!
+            } catch (Exception ex) {
+                retries--;
+                if (retries == 0) throw;
+                Console.WriteLine($"Seeding failed, retrying... ({retries} left). Error: {ex.Message}");
+                System.Threading.Thread.Sleep(5000);
+            }
         }
     } catch (Exception ex) {
         Console.WriteLine("DB Init Error: " + ex.Message);
