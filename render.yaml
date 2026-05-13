@@ -4,7 +4,7 @@ services:
     name: eshoppingzone-product
     runtime: docker
     dockerContext: ./EShoppingZone.Product.API
-    dockerfilePath: ./Dockerfile
+    dockerfilePath: ./EShoppingZone.Product.API/Dockerfile
     plan: free
     envVars:
       - key: ConnectionStrings__ProductDb
@@ -23,7 +23,7 @@ services:
     name: eshoppingzone-profile
     runtime: docker
     dockerContext: ./EShoppingZone.Profile.API
-    dockerfilePath: ./Dockerfile
+    dockerfilePath: ./EShoppingZone.Profile.API/Dockerfile
     plan: free
     envVars:
       - key: ConnectionStrings__ProfileDb
@@ -42,7 +42,7 @@ services:
     name: eshoppingzone-cart
     runtime: docker
     dockerContext: ./EShoppingZone.Cart.API
-    dockerfilePath: ./Dockerfile
+    dockerfilePath: ./EShoppingZone.Cart.API/Dockerfile
     plan: free
     envVars:
       - key: ConnectionStrings__CartDb
@@ -61,7 +61,7 @@ services:
     name: eshoppingzone-order
     runtime: docker
     dockerContext: ./EShoppingZone.Order.API
-    dockerfilePath: ./Dockerfile
+    dockerfilePath: ./EShoppingZone.Order.API/Dockerfile
     plan: free
     envVars:
       - key: ConnectionStrings__OrderDb
@@ -80,7 +80,7 @@ services:
     name: eshoppingzone-wallet
     runtime: docker
     dockerContext: ./EShoppingZone.Wallet.API
-    dockerfilePath: ./Dockerfile
+    dockerfilePath: ./EShoppingZone.Wallet.API/Dockerfile
     plan: free
     envVars:
       - key: ConnectionStrings__WalletDb
