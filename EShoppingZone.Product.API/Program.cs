@@ -14,15 +14,44 @@ var builder = WebApplication.CreateBuilder(args);
 // DbContext — PostgreSQL
 var connectionString = builder.Configuration.GetConnectionString("ProductDb");
 
-// Render-specific: construct from individual env vars if available
-var dbHost = builder.Configuration["DB_HOST"];
-if (!string.IsNullOrEmpty(dbHost))
+// Render-specific: Use DATABASE_URL if available (postgres:// format)
+var databaseUrl = builder.Configuration["DATABASE_URL"];
+if (!string.IsNullOrEmpty(databaseUrl))
 {
-    var dbPort = builder.Configuration["DB_PORT"] ?? "5432";
-    var dbName = builder.Configuration["DB_NAME"];
-    var dbUser = builder.Configuration["DB_USER"];
-    var dbPass = builder.Configuration["DB_PASSWORD"];
-    connectionString = $"Host={dbHost};Port={dbPort};Database={dbName};Username={dbUser};Password={dbPass};SSL Mode=Require;Trust Server Certificate=true;Maximum Pool Size=10;";
+    var uri = new Uri(databaseUrl);
+    var userInfo = uri.UserInfo.Split(':');
+    var connBuilder = new Npgsql.NpgsqlConnectionStringBuilder
+    {
+        Host = uri.Host,
+        Port = uri.Port,
+        Database = uri.AbsolutePath.Trim('/'),
+        Username = userInfo[0],
+        Password = userInfo[1],
+        SslMode = Npgsql.SslMode.Require,
+        TrustServerCertificate = true,
+        MaxPoolSize = 10
+    };
+    connectionString = connBuilder.ToString();
+}
+else
+{
+    // Fallback to individual components
+    var dbHost = builder.Configuration["DB_HOST"];
+    if (!string.IsNullOrEmpty(dbHost))
+    {
+        var connBuilder = new Npgsql.NpgsqlConnectionStringBuilder
+        {
+            Host = dbHost,
+            Port = int.Parse(builder.Configuration["DB_PORT"] ?? "5432"),
+            Database = builder.Configuration["DB_NAME"],
+            Username = builder.Configuration["DB_USER"],
+            Password = builder.Configuration["DB_PASSWORD"],
+            SslMode = Npgsql.SslMode.Require,
+            TrustServerCertificate = true,
+            MaxPoolSize = 10
+        };
+        connectionString = connBuilder.ToString();
+    }
 }
 
 if (string.IsNullOrEmpty(connectionString))

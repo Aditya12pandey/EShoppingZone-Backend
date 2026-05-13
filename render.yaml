@@ -17,10 +17,10 @@ services:
         value: "20"
       - key: COMPlus_ThreadPool_ForceMaxIOThreads
         value: "20"
-      - key: DB_HOST
+      - key: DATABASE_URL
         fromDatabase:
           name: eshoppingzone-db
-          property: host
+          property: connectionString
       - key: DB_PORT
         fromDatabase:
           name: eshoppingzone-db
@@ -62,10 +62,10 @@ services:
         value: "20"
       - key: COMPlus_ThreadPool_ForceMaxIOThreads
         value: "20"
-      - key: DB_HOST
+      - key: DATABASE_URL
         fromDatabase:
           name: eshoppingzone-db
-          property: host
+          property: connectionString
       - key: DB_PORT
         fromDatabase:
           name: eshoppingzone-db
@@ -107,10 +107,10 @@ services:
         value: "20"
       - key: COMPlus_ThreadPool_ForceMaxIOThreads
         value: "20"
-      - key: DB_HOST
+      - key: DATABASE_URL
         fromDatabase:
           name: eshoppingzone-db
-          property: host
+          property: connectionString
       - key: DB_PORT
         fromDatabase:
           name: eshoppingzone-db
@@ -152,10 +152,10 @@ services:
         value: "20"
       - key: COMPlus_ThreadPool_ForceMaxIOThreads
         value: "20"
-      - key: DB_HOST
+      - key: DATABASE_URL
         fromDatabase:
           name: eshoppingzone-db
-          property: host
+          property: connectionString
       - key: DB_PORT
         fromDatabase:
           name: eshoppingzone-db
@@ -197,10 +197,10 @@ services:
         value: "20"
       - key: COMPlus_ThreadPool_ForceMaxIOThreads
         value: "20"
-      - key: DB_HOST
+      - key: DATABASE_URL
         fromDatabase:
           name: eshoppingzone-db
-          property: host
+          property: connectionString
       - key: DB_PORT
         fromDatabase:
           name: eshoppingzone-db
