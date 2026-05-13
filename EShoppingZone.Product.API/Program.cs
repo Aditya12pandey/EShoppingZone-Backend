@@ -23,10 +23,10 @@ if (!string.IsNullOrEmpty(databaseUrl))
     var connBuilder = new Npgsql.NpgsqlConnectionStringBuilder
     {
         Host = uri.Host,
-        Port = uri.Port > 0 ? uri.Port : 5432, // Fix for -1 port error
+        Port = uri.Port > 0 ? uri.Port : 5432,
         Database = uri.AbsolutePath.Trim('/'),
-        Username = userInfo[0],
-        Password = userInfo[1],
+        Username = Uri.UnescapeDataString(userInfo[0]),
+        Password = Uri.UnescapeDataString(userInfo[1]),
         SslMode = Npgsql.SslMode.Require,
         TrustServerCertificate = true,
         MaxPoolSize = 10
