@@ -33,7 +33,7 @@ namespace EShoppingZone.Profile.API.Middleware
                 UnauthorizedAccessException => (401, "Unauthorized access."),
                 KeyNotFoundException => (404, ex.Message),
                 ArgumentException => (400, ex.Message),
-                _ => (500, "An unexpected error occurred. Please try again later.")
+                _ => (500, ex.Message) // Now returning the REAL error message!
             };
 
             context.Response.StatusCode = statusCode;
