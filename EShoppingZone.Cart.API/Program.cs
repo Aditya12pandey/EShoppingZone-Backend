@@ -4,6 +4,7 @@ using EShoppingZone.Cart.API.Services;
 using EShoppingZone.Cart.API.Middleware;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Text;
@@ -151,15 +152,13 @@ app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();
 
-// Auto-migration and manual schema fix
+// Auto-migration
 using (var scope = app.Services.CreateScope())
 {
     try {
-        // Wait for master service
-        System.Threading.Thread.Sleep(5000);
-        
         var db = scope.ServiceProvider.GetRequiredService<CartDbContext>();
-        db.Database.EnsureCreated();
+        var creator = db.Database.GetService<Microsoft.EntityFrameworkCore.Storage.IRelationalDatabaseCreator>();
+        try { creator.CreateTables(); } catch { /* Tables may already exist */ }
     } catch (Exception ex) {
         Console.WriteLine("DB Init Error: " + ex.Message);
     }

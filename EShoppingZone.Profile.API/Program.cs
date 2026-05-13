@@ -5,6 +5,7 @@ using EShoppingZone.Profile.API.Services;
 using EShoppingZone.Profile.API.Middleware;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Text;
@@ -150,18 +151,19 @@ using (var scope = app.Services.CreateScope())
 {
     try {
         var db = scope.ServiceProvider.GetRequiredService<ProfileDbContext>();
-        db.Database.EnsureDeleted(); // CLEAN SLATE
-        db.Database.EnsureCreated();
+        var creator = db.Database.GetService<Microsoft.EntityFrameworkCore.Storage.IRelationalDatabaseCreator>();
+        try { creator.CreateTables(); } catch { /* Tables may already exist */ }
     } catch (Exception ex) {
         Console.WriteLine("DB Init Error: " + ex.Message);
     }
 }
 
+app.UseSwagger();
+app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Profile API v1"));
+
 if (app.Environment.IsDevelopment())
 {
-    app.UseSwagger();
-    app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json",
-        "Profile API v1"));
+    // development only stuff here
 }
 
 app.UseMiddleware<GlobalExceptionMiddleware>();
