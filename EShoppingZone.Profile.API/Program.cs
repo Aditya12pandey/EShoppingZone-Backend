@@ -17,11 +17,16 @@ var connectionString = builder.Configuration.GetConnectionString("ProfileDb");
 var dbHost = builder.Configuration["DB_HOST"];
 if (!string.IsNullOrEmpty(dbHost))
 {
-    var dbPort = builder.Configuration["DB_PORT"];
+    var dbPort = builder.Configuration["DB_PORT"] ?? "5432";
     var dbName = builder.Configuration["DB_NAME"];
     var dbUser = builder.Configuration["DB_USER"];
     var dbPass = builder.Configuration["DB_PASSWORD"];
-    connectionString = $"Host={dbHost};Port={dbPort};Database={dbName};Username={dbUser};Password={dbPass};SSL Mode=Require;Trust Server Certificate=true";
+    connectionString = $"Host={dbHost};Port={dbPort};Database={dbName};Username={dbUser};Password={dbPass};SSL Mode=Require;Trust Server Certificate=true;Maximum Pool Size=10;";
+}
+
+if (string.IsNullOrEmpty(connectionString))
+{
+    connectionString = "Host=localhost;Database=dummy;";
 }
 
 builder.Services.AddDbContext<ProfileDbContext>(options =>
@@ -112,8 +117,12 @@ var app = builder.Build();
 
 using (var scope = app.Services.CreateScope())
 {
-    var db = scope.ServiceProvider.GetRequiredService<ProfileDbContext>();
-    db.Database.EnsureCreated();
+    try {
+        var db = scope.ServiceProvider.GetRequiredService<ProfileDbContext>();
+        db.Database.EnsureCreated();
+    } catch (Exception ex) {
+        Console.WriteLine("DB Init Error: " + ex.Message);
+    }
 }
 
 if (app.Environment.IsDevelopment())

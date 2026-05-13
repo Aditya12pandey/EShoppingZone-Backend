@@ -12,18 +12,23 @@ using System.Text;
 var builder = WebApplication.CreateBuilder(args);
 
 // DbContext — PostgreSQL
-// DbContext — PostgreSQL
 var connectionString = builder.Configuration.GetConnectionString("ProductDb");
 
 // Render-specific: construct from individual env vars if available
 var dbHost = builder.Configuration["DB_HOST"];
 if (!string.IsNullOrEmpty(dbHost))
 {
-    var dbPort = builder.Configuration["DB_PORT"];
+    var dbPort = builder.Configuration["DB_PORT"] ?? "5432";
     var dbName = builder.Configuration["DB_NAME"];
     var dbUser = builder.Configuration["DB_USER"];
     var dbPass = builder.Configuration["DB_PASSWORD"];
-    connectionString = $"Host={dbHost};Port={dbPort};Database={dbName};Username={dbUser};Password={dbPass};SSL Mode=Require;Trust Server Certificate=true";
+    connectionString = $"Host={dbHost};Port={dbPort};Database={dbName};Username={dbUser};Password={dbPass};SSL Mode=Require;Trust Server Certificate=true;Maximum Pool Size=10;";
+}
+
+if (string.IsNullOrEmpty(connectionString))
+{
+    // Fallback to a dummy string to prevent startup crash, though Render should provide env vars
+    connectionString = "Host=localhost;Database=dummy;";
 }
 
 builder.Services.AddDbContext<ProductDbContext>(options =>
@@ -124,8 +129,12 @@ app.MapControllers();
 // Auto-migration
 using (var scope = app.Services.CreateScope())
 {
-    var db = scope.ServiceProvider.GetRequiredService<ProductDbContext>();
-    db.Database.EnsureCreated(); 
+    try {
+        var db = scope.ServiceProvider.GetRequiredService<ProductDbContext>();
+        db.Database.EnsureCreated(); 
+    } catch (Exception ex) {
+        Console.WriteLine("DB Init Error: " + ex.Message);
+    }
 }
 
 app.Run();

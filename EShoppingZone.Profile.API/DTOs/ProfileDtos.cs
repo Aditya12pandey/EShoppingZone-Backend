@@ -22,14 +22,12 @@ namespace EShoppingZone.Profile.API.DTOs
             ErrorMessage = "Password must have 8+ chars, 1 uppercase, 1 number, 1 special character.")]
         public string Password { get; set; } = string.Empty;
 
-        [Required(ErrorMessage = "Gender is required.")]
         [RegularExpression(@"^(Male|Female|Other)$", ErrorMessage = "Gender must be Male, Female or Other.")]
         public string Gender { get; set; } = string.Empty;
 
         [StringLength(500, ErrorMessage = "About cannot exceed 500 characters.")]
         public string About { get; set; } = string.Empty;
 
-        [Required(ErrorMessage = "Date of birth is required.")]
         public DateTime DateOfBirth { get; set; }
     }
 
