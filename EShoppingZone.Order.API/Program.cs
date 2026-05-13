@@ -21,7 +21,7 @@ if (!string.IsNullOrEmpty(databaseUrl))
     var connBuilder = new Npgsql.NpgsqlConnectionStringBuilder
     {
         Host = uri.Host,
-        Port = uri.Port,
+        Port = uri.Port > 0 ? uri.Port : 5432, // Fix for -1 port error
         Database = uri.AbsolutePath.Trim('/'),
         Username = userInfo[0],
         Password = userInfo[1],
