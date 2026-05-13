@@ -18,7 +18,9 @@ services:
       - key: COMPlus_ThreadPool_ForceMaxIOThreads
         value: "20"
       - key: ConnectionStrings__ProductDb
-        value: Host=${eshoppingzone-db.host};Port=${eshoppingzone-db.port};Database=${eshoppingzone-db.database};Username=${eshoppingzone-db.user};Password=${eshoppingzone-db.password};SSL Mode=Require;Trust Server Certificate=true
+        fromDatabase:
+          name: eshoppingzone-db
+          property: connectionString
       - key: Jwt__Key
         value: EShoppingZone_SuperSecretKey_2026_DoNotShare_MinLength32Chars!
       - key: Jwt__Issuer
@@ -45,7 +47,9 @@ services:
       - key: COMPlus_ThreadPool_ForceMaxIOThreads
         value: "20"
       - key: ConnectionStrings__ProfileDb
-        value: Host=${eshoppingzone-db.host};Port=${eshoppingzone-db.port};Database=${eshoppingzone-db.database};Username=${eshoppingzone-db.user};Password=${eshoppingzone-db.password};SSL Mode=Require;Trust Server Certificate=true
+        fromDatabase:
+          name: eshoppingzone-db
+          property: connectionString
       - key: Jwt__Key
         value: EShoppingZone_SuperSecretKey_2026_DoNotShare_MinLength32Chars!
       - key: Jwt__Issuer
@@ -72,7 +76,9 @@ services:
       - key: COMPlus_ThreadPool_ForceMaxIOThreads
         value: "20"
       - key: ConnectionStrings__CartDb
-        value: Host=${eshoppingzone-db.host};Port=${eshoppingzone-db.port};Database=${eshoppingzone-db.database};Username=${eshoppingzone-db.user};Password=${eshoppingzone-db.password};SSL Mode=Require;Trust Server Certificate=true
+        fromDatabase:
+          name: eshoppingzone-db
+          property: connectionString
       - key: Jwt__Key
         value: EShoppingZone_SuperSecretKey_2026_DoNotShare_MinLength32Chars!
       - key: Jwt__Issuer
@@ -99,7 +105,9 @@ services:
       - key: COMPlus_ThreadPool_ForceMaxIOThreads
         value: "20"
       - key: ConnectionStrings__OrderDb
-        value: Host=${eshoppingzone-db.host};Port=${eshoppingzone-db.port};Database=${eshoppingzone-db.database};Username=${eshoppingzone-db.user};Password=${eshoppingzone-db.password};SSL Mode=Require;Trust Server Certificate=true
+        fromDatabase:
+          name: eshoppingzone-db
+          property: connectionString
       - key: Jwt__Key
         value: EShoppingZone_SuperSecretKey_2026_DoNotShare_MinLength32Chars!
       - key: Jwt__Issuer
@@ -126,7 +134,9 @@ services:
       - key: COMPlus_ThreadPool_ForceMaxIOThreads
         value: "20"
       - key: ConnectionStrings__WalletDb
-        value: Host=${eshoppingzone-db.host};Port=${eshoppingzone-db.port};Database=${eshoppingzone-db.database};Username=${eshoppingzone-db.user};Password=${eshoppingzone-db.password};SSL Mode=Require;Trust Server Certificate=true
+        fromDatabase:
+          name: eshoppingzone-db
+          property: connectionString
       - key: Jwt__Key
         value: EShoppingZone_SuperSecretKey_2026_DoNotShare_MinLength32Chars!
       - key: Jwt__Issuer
