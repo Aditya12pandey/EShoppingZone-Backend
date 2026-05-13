@@ -17,10 +17,26 @@ services:
         value: "20"
       - key: COMPlus_ThreadPool_ForceMaxIOThreads
         value: "20"
-      - key: ConnectionStrings__ProductDb
+      - key: DB_HOST
         fromDatabase:
           name: eshoppingzone-db
-          property: connectionString
+          property: host
+      - key: DB_PORT
+        fromDatabase:
+          name: eshoppingzone-db
+          property: port
+      - key: DB_NAME
+        fromDatabase:
+          name: eshoppingzone-db
+          property: database
+      - key: DB_USER
+        fromDatabase:
+          name: eshoppingzone-db
+          property: user
+      - key: DB_PASSWORD
+        fromDatabase:
+          name: eshoppingzone-db
+          property: password
       - key: Jwt__Key
         value: EShoppingZone_SuperSecretKey_2026_DoNotShare_MinLength32Chars!
       - key: Jwt__Issuer
@@ -46,10 +62,26 @@ services:
         value: "20"
       - key: COMPlus_ThreadPool_ForceMaxIOThreads
         value: "20"
-      - key: ConnectionStrings__ProfileDb
+      - key: DB_HOST
         fromDatabase:
           name: eshoppingzone-db
-          property: connectionString
+          property: host
+      - key: DB_PORT
+        fromDatabase:
+          name: eshoppingzone-db
+          property: port
+      - key: DB_NAME
+        fromDatabase:
+          name: eshoppingzone-db
+          property: database
+      - key: DB_USER
+        fromDatabase:
+          name: eshoppingzone-db
+          property: user
+      - key: DB_PASSWORD
+        fromDatabase:
+          name: eshoppingzone-db
+          property: password
       - key: Jwt__Key
         value: EShoppingZone_SuperSecretKey_2026_DoNotShare_MinLength32Chars!
       - key: Jwt__Issuer
@@ -75,10 +107,26 @@ services:
         value: "20"
       - key: COMPlus_ThreadPool_ForceMaxIOThreads
         value: "20"
-      - key: ConnectionStrings__CartDb
+      - key: DB_HOST
         fromDatabase:
           name: eshoppingzone-db
-          property: connectionString
+          property: host
+      - key: DB_PORT
+        fromDatabase:
+          name: eshoppingzone-db
+          property: port
+      - key: DB_NAME
+        fromDatabase:
+          name: eshoppingzone-db
+          property: database
+      - key: DB_USER
+        fromDatabase:
+          name: eshoppingzone-db
+          property: user
+      - key: DB_PASSWORD
+        fromDatabase:
+          name: eshoppingzone-db
+          property: password
       - key: Jwt__Key
         value: EShoppingZone_SuperSecretKey_2026_DoNotShare_MinLength32Chars!
       - key: Jwt__Issuer
@@ -104,10 +152,26 @@ services:
         value: "20"
       - key: COMPlus_ThreadPool_ForceMaxIOThreads
         value: "20"
-      - key: ConnectionStrings__OrderDb
+      - key: DB_HOST
         fromDatabase:
           name: eshoppingzone-db
-          property: connectionString
+          property: host
+      - key: DB_PORT
+        fromDatabase:
+          name: eshoppingzone-db
+          property: port
+      - key: DB_NAME
+        fromDatabase:
+          name: eshoppingzone-db
+          property: database
+      - key: DB_USER
+        fromDatabase:
+          name: eshoppingzone-db
+          property: user
+      - key: DB_PASSWORD
+        fromDatabase:
+          name: eshoppingzone-db
+          property: password
       - key: Jwt__Key
         value: EShoppingZone_SuperSecretKey_2026_DoNotShare_MinLength32Chars!
       - key: Jwt__Issuer
@@ -133,10 +197,26 @@ services:
         value: "20"
       - key: COMPlus_ThreadPool_ForceMaxIOThreads
         value: "20"
-      - key: ConnectionStrings__WalletDb
+      - key: DB_HOST
         fromDatabase:
           name: eshoppingzone-db
-          property: connectionString
+          property: host
+      - key: DB_PORT
+        fromDatabase:
+          name: eshoppingzone-db
+          property: port
+      - key: DB_NAME
+        fromDatabase:
+          name: eshoppingzone-db
+          property: database
+      - key: DB_USER
+        fromDatabase:
+          name: eshoppingzone-db
+          property: user
+      - key: DB_PASSWORD
+        fromDatabase:
+          name: eshoppingzone-db
+          property: password
       - key: Jwt__Key
         value: EShoppingZone_SuperSecretKey_2026_DoNotShare_MinLength32Chars!
       - key: Jwt__Issuer

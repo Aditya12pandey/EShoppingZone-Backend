@@ -11,15 +11,18 @@ using System.Text;
 var builder = WebApplication.CreateBuilder(args);
 
 var connectionString = builder.Configuration.GetConnectionString("WalletDb");
-if (connectionString != null && connectionString.StartsWith("postgres://"))
+
+// Render-specific: construct from individual env vars if available
+var dbHost = builder.Configuration["DB_HOST"];
+if (!string.IsNullOrEmpty(dbHost))
 {
-    var uri = new Uri(connectionString);
-    var db = uri.AbsolutePath.TrimStart('/');
-    var user = uri.UserInfo.Split(':')[0];
-    var passwd = uri.UserInfo.Split(':')[1];
-    var port = uri.Port > 0 ? uri.Port : 5432;
-    connectionString = $"Host={uri.Host};Port={port};Database={db};Username={user};Password={passwd};SSL Mode=Require;Trust Server Certificate=true";
+    var dbPort = builder.Configuration["DB_PORT"];
+    var dbName = builder.Configuration["DB_NAME"];
+    var dbUser = builder.Configuration["DB_USER"];
+    var dbPass = builder.Configuration["DB_PASSWORD"];
+    connectionString = $"Host={dbHost};Port={dbPort};Database={dbName};Username={dbUser};Password={dbPass};SSL Mode=Require;Trust Server Certificate=true";
 }
+
 builder.Services.AddDbContext<WalletDbContext>(options =>
     options.UseNpgsql(connectionString));
 
