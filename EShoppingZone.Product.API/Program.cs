@@ -162,7 +162,6 @@ using (var scope = app.Services.CreateScope())
 {
     try {
         var db = scope.ServiceProvider.GetRequiredService<ProductDbContext>();
-        db.Database.EnsureDeleted(); // CLEAN SLATE
         db.Database.EnsureCreated(); 
     } catch (Exception ex) {
         Console.WriteLine("DB Init Error: " + ex.Message);
