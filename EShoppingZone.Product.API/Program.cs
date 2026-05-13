@@ -19,14 +19,16 @@ var databaseUrl = builder.Configuration["DATABASE_URL"];
 if (!string.IsNullOrEmpty(databaseUrl))
 {
     var uri = new Uri(databaseUrl);
-    var userInfo = uri.UserInfo.Split(':');
+    var userPass = Uri.UnescapeDataString(uri.UserInfo);
+    var colonIndex = userPass.IndexOf(':');
+    
     var connBuilder = new Npgsql.NpgsqlConnectionStringBuilder
     {
         Host = uri.Host,
         Port = uri.Port > 0 ? uri.Port : 5432,
         Database = uri.AbsolutePath.Trim('/'),
-        Username = Uri.UnescapeDataString(userInfo[0]),
-        Password = Uri.UnescapeDataString(userInfo[1]),
+        Username = colonIndex > 0 ? userPass.Substring(0, colonIndex) : userPass,
+        Password = colonIndex > 0 ? userPass.Substring(colonIndex + 1) : string.Empty,
         SslMode = Npgsql.SslMode.Require,
         TrustServerCertificate = true,
         MaxPoolSize = 10
