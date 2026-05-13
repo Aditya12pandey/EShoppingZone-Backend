@@ -31,7 +31,7 @@ if (!string.IsNullOrEmpty(databaseUrl))
         Password = colonIndex > 0 ? userPass.Substring(colonIndex + 1) : string.Empty,
         SslMode = Npgsql.SslMode.Require,
         TrustServerCertificate = true,
-        MaxPoolSize = 10
+        MaxPoolSize = 5
     };
     connectionString = connBuilder.ToString();
 }
