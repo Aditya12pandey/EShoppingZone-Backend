@@ -7,6 +7,8 @@ services:
     dockerfilePath: EShoppingZone.Product.API/Dockerfile
     plan: free
     envVars:
+      - key: DOTNET_gcServer
+        value: "0"
       - key: ConnectionStrings__ProductDb
         fromDatabase:
           name: eshoppingzone-db
@@ -26,6 +28,8 @@ services:
     dockerfilePath: EShoppingZone.Profile.API/Dockerfile
     plan: free
     envVars:
+      - key: DOTNET_gcServer
+        value: "0"
       - key: ConnectionStrings__ProfileDb
         fromDatabase:
           name: eshoppingzone-db
@@ -45,6 +49,8 @@ services:
     dockerfilePath: EShoppingZone.Cart.API/Dockerfile
     plan: free
     envVars:
+      - key: DOTNET_gcServer
+        value: "0"
       - key: ConnectionStrings__CartDb
         fromDatabase:
           name: eshoppingzone-db
@@ -64,6 +70,8 @@ services:
     dockerfilePath: EShoppingZone.Order.API/Dockerfile
     plan: free
     envVars:
+      - key: DOTNET_gcServer
+        value: "0"
       - key: ConnectionStrings__OrderDb
         fromDatabase:
           name: eshoppingzone-db
@@ -83,6 +91,8 @@ services:
     dockerfilePath: EShoppingZone.Wallet.API/Dockerfile
     plan: free
     envVars:
+      - key: DOTNET_gcServer
+        value: "0"
       - key: ConnectionStrings__WalletDb
         fromDatabase:
           name: eshoppingzone-db
