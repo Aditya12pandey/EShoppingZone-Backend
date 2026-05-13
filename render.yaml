@@ -10,9 +10,27 @@ services:
       - key: DOTNET_gcServer
         value: "0"
       - key: ConnectionStrings__ProductDb
+        value: Host=${DB_HOST};Port=${DB_PORT};Database=${DB_NAME};Username=${DB_USER};Password=${DB_PASSWORD}
+      - key: DB_HOST
         fromDatabase:
           name: eshoppingzone-db
-          property: connectionString
+          property: host
+      - key: DB_PORT
+        fromDatabase:
+          name: eshoppingzone-db
+          property: port
+      - key: DB_NAME
+        fromDatabase:
+          name: eshoppingzone-db
+          property: database
+      - key: DB_USER
+        fromDatabase:
+          name: eshoppingzone-db
+          property: user
+      - key: DB_PASSWORD
+        fromDatabase:
+          name: eshoppingzone-db
+          property: password
       - key: Jwt__Key
         value: EShoppingZone_SuperSecretKey_2026_DoNotShare_MinLength32Chars!
       - key: Jwt__Issuer
@@ -31,9 +49,27 @@ services:
       - key: DOTNET_gcServer
         value: "0"
       - key: ConnectionStrings__ProfileDb
+        value: Host=${DB_HOST};Port=${DB_PORT};Database=${DB_NAME};Username=${DB_USER};Password=${DB_PASSWORD}
+      - key: DB_HOST
         fromDatabase:
           name: eshoppingzone-db
-          property: connectionString
+          property: host
+      - key: DB_PORT
+        fromDatabase:
+          name: eshoppingzone-db
+          property: port
+      - key: DB_NAME
+        fromDatabase:
+          name: eshoppingzone-db
+          property: database
+      - key: DB_USER
+        fromDatabase:
+          name: eshoppingzone-db
+          property: user
+      - key: DB_PASSWORD
+        fromDatabase:
+          name: eshoppingzone-db
+          property: password
       - key: Jwt__Key
         value: EShoppingZone_SuperSecretKey_2026_DoNotShare_MinLength32Chars!
       - key: Jwt__Issuer
@@ -52,9 +88,27 @@ services:
       - key: DOTNET_gcServer
         value: "0"
       - key: ConnectionStrings__CartDb
+        value: Host=${DB_HOST};Port=${DB_PORT};Database=${DB_NAME};Username=${DB_USER};Password=${DB_PASSWORD}
+      - key: DB_HOST
         fromDatabase:
           name: eshoppingzone-db
-          property: connectionString
+          property: host
+      - key: DB_PORT
+        fromDatabase:
+          name: eshoppingzone-db
+          property: port
+      - key: DB_NAME
+        fromDatabase:
+          name: eshoppingzone-db
+          property: database
+      - key: DB_USER
+        fromDatabase:
+          name: eshoppingzone-db
+          property: user
+      - key: DB_PASSWORD
+        fromDatabase:
+          name: eshoppingzone-db
+          property: password
       - key: Jwt__Key
         value: EShoppingZone_SuperSecretKey_2026_DoNotShare_MinLength32Chars!
       - key: Jwt__Issuer
@@ -73,9 +127,27 @@ services:
       - key: DOTNET_gcServer
         value: "0"
       - key: ConnectionStrings__OrderDb
+        value: Host=${DB_HOST};Port=${DB_PORT};Database=${DB_NAME};Username=${DB_USER};Password=${DB_PASSWORD}
+      - key: DB_HOST
         fromDatabase:
           name: eshoppingzone-db
-          property: connectionString
+          property: host
+      - key: DB_PORT
+        fromDatabase:
+          name: eshoppingzone-db
+          property: port
+      - key: DB_NAME
+        fromDatabase:
+          name: eshoppingzone-db
+          property: database
+      - key: DB_USER
+        fromDatabase:
+          name: eshoppingzone-db
+          property: user
+      - key: DB_PASSWORD
+        fromDatabase:
+          name: eshoppingzone-db
+          property: password
       - key: Jwt__Key
         value: EShoppingZone_SuperSecretKey_2026_DoNotShare_MinLength32Chars!
       - key: Jwt__Issuer
@@ -94,9 +166,27 @@ services:
       - key: DOTNET_gcServer
         value: "0"
       - key: ConnectionStrings__WalletDb
+        value: Host=${DB_HOST};Port=${DB_PORT};Database=${DB_NAME};Username=${DB_USER};Password=${DB_PASSWORD}
+      - key: DB_HOST
         fromDatabase:
           name: eshoppingzone-db
-          property: connectionString
+          property: host
+      - key: DB_PORT
+        fromDatabase:
+          name: eshoppingzone-db
+          property: port
+      - key: DB_NAME
+        fromDatabase:
+          name: eshoppingzone-db
+          property: database
+      - key: DB_USER
+        fromDatabase:
+          name: eshoppingzone-db
+          property: user
+      - key: DB_PASSWORD
+        fromDatabase:
+          name: eshoppingzone-db
+          property: password
       - key: Jwt__Key
         value: EShoppingZone_SuperSecretKey_2026_DoNotShare_MinLength32Chars!
       - key: Jwt__Issuer
