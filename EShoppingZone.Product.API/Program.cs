@@ -163,6 +163,37 @@ using (var scope = app.Services.CreateScope())
     try {
         var db = scope.ServiceProvider.GetRequiredService<ProductDbContext>();
         db.Database.EnsureCreated(); 
+
+        if (!db.Products.Any())
+        {
+            db.Products.AddRange(new List<EShoppingZone.Product.API.Entities.ProductEntity>
+            {
+                new() {
+                    ProductName = "Sample Smartphone",
+                    ProductType = "Electronics",
+                    Category = "Mobiles",
+                    Price = 599.99,
+                    Description = "A great smartphone with amazing features.",
+                    Image = new List<string> { "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9" },
+                    Rating = new Dictionary<int, double> { { 5, 4.5 } },
+                    Review = new Dictionary<int, string> { { 1, "Amazing!" } },
+                    Specification = new Dictionary<string, string> { { "RAM", "8GB" }, { "Storage", "128GB" } }
+                },
+                new() {
+                    ProductName = "Classic Watch",
+                    ProductType = "Accessories",
+                    Category = "Watches",
+                    Price = 120.00,
+                    Description = "A timeless classic for any occasion.",
+                    Image = new List<string> { "https://images.unsplash.com/photo-1524592094714-0f0654e20314" },
+                    Rating = new Dictionary<int, double> { { 5, 4.8 } },
+                    Review = new Dictionary<int, string> { { 2, "Very elegant." } },
+                    Specification = new Dictionary<string, string> { { "Material", "Leather" }, { "Water Resistance", "50m" } }
+                }
+            });
+            db.SaveChanges();
+            Console.WriteLine("Database Seeded with sample products!");
+        }
     } catch (Exception ex) {
         Console.WriteLine("DB Init Error: " + ex.Message);
     }
