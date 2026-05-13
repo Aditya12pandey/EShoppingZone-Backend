@@ -106,7 +106,7 @@ app.MapControllers();
 using (var scope = app.Services.CreateScope())
 {
     var db = scope.ServiceProvider.GetRequiredService<CartDbContext>();
-    db.Database.Migrate();
+    db.Database.EnsureCreated();
     
     // Ensure the MerchantId column exists (handles cases where migration was already marked as applied)
     try {
