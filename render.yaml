@@ -7,8 +7,16 @@ services:
     dockerfilePath: EShoppingZone.Product.API/Dockerfile
     plan: free
     envVars:
+      - key: ASPNETCORE_ENVIRONMENT
+        value: Production
       - key: DOTNET_gcServer
         value: "0"
+      - key: DOTNET_PRINT_TELEMETRY_MESSAGE
+        value: "false"
+      - key: COMPlus_ThreadPool_ForceMaxWorkerThreads
+        value: "20"
+      - key: COMPlus_ThreadPool_ForceMaxIOThreads
+        value: "20"
       - key: ConnectionStrings__ProductDb
         value: Host=${DB_HOST};Port=${DB_PORT};Database=${DB_NAME};Username=${DB_USER};Password=${DB_PASSWORD}
       - key: DB_HOST
@@ -46,8 +54,16 @@ services:
     dockerfilePath: EShoppingZone.Profile.API/Dockerfile
     plan: free
     envVars:
+      - key: ASPNETCORE_ENVIRONMENT
+        value: Production
       - key: DOTNET_gcServer
         value: "0"
+      - key: DOTNET_PRINT_TELEMETRY_MESSAGE
+        value: "false"
+      - key: COMPlus_ThreadPool_ForceMaxWorkerThreads
+        value: "20"
+      - key: COMPlus_ThreadPool_ForceMaxIOThreads
+        value: "20"
       - key: ConnectionStrings__ProfileDb
         value: Host=${DB_HOST};Port=${DB_PORT};Database=${DB_NAME};Username=${DB_USER};Password=${DB_PASSWORD}
       - key: DB_HOST
@@ -85,8 +101,16 @@ services:
     dockerfilePath: EShoppingZone.Cart.API/Dockerfile
     plan: free
     envVars:
+      - key: ASPNETCORE_ENVIRONMENT
+        value: Production
       - key: DOTNET_gcServer
         value: "0"
+      - key: DOTNET_PRINT_TELEMETRY_MESSAGE
+        value: "false"
+      - key: COMPlus_ThreadPool_ForceMaxWorkerThreads
+        value: "20"
+      - key: COMPlus_ThreadPool_ForceMaxIOThreads
+        value: "20"
       - key: ConnectionStrings__CartDb
         value: Host=${DB_HOST};Port=${DB_PORT};Database=${DB_NAME};Username=${DB_USER};Password=${DB_PASSWORD}
       - key: DB_HOST
@@ -124,8 +148,16 @@ services:
     dockerfilePath: EShoppingZone.Order.API/Dockerfile
     plan: free
     envVars:
+      - key: ASPNETCORE_ENVIRONMENT
+        value: Production
       - key: DOTNET_gcServer
         value: "0"
+      - key: DOTNET_PRINT_TELEMETRY_MESSAGE
+        value: "false"
+      - key: COMPlus_ThreadPool_ForceMaxWorkerThreads
+        value: "20"
+      - key: COMPlus_ThreadPool_ForceMaxIOThreads
+        value: "20"
       - key: ConnectionStrings__OrderDb
         value: Host=${DB_HOST};Port=${DB_PORT};Database=${DB_NAME};Username=${DB_USER};Password=${DB_PASSWORD}
       - key: DB_HOST
@@ -163,8 +195,16 @@ services:
     dockerfilePath: EShoppingZone.Wallet.API/Dockerfile
     plan: free
     envVars:
+      - key: ASPNETCORE_ENVIRONMENT
+        value: Production
       - key: DOTNET_gcServer
         value: "0"
+      - key: DOTNET_PRINT_TELEMETRY_MESSAGE
+        value: "false"
+      - key: COMPlus_ThreadPool_ForceMaxWorkerThreads
+        value: "20"
+      - key: COMPlus_ThreadPool_ForceMaxIOThreads
+        value: "20"
       - key: ConnectionStrings__WalletDb
         value: Host=${DB_HOST};Port=${DB_PORT};Database=${DB_NAME};Username=${DB_USER};Password=${DB_PASSWORD}
       - key: DB_HOST
